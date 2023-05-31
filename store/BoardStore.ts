@@ -1,4 +1,4 @@
-import { databases } from '@/appwrite';
+import { databases, storage } from '@/appwrite';
 import getTodosGroupedByColumn from '@/lib/getTodosGroupedByColumn';
 import { Board, Column, Todo, TypedColumn } from '@/types';
 import { create } from 'zustand'
@@ -8,12 +8,14 @@ interface BoardState {
     getBoard: () => void,
     setBoardState: (board: Board) => void,
     updateTodoInDb: (todo: Todo, columnId: TypedColumn) => void,
-
+    
     searchString: string,
     setSearchString: (searchString: string) => void,
+    
+    deleteTask: (taskIndex: number, todoId: Todo, id: TypedColumn) => void,
 }
 
-export const useBoardStore = create<BoardState>((set) => ({
+export const useBoardStore = create<BoardState>((set, get) => ({
     board: {
         columns: new Map<TypedColumn, Column>(),
     },
@@ -38,5 +40,25 @@ export const useBoardStore = create<BoardState>((set) => ({
                 status: columnId,
             }
         )
-    }
+    },
+
+    deleteTask: async (taskIndex, todo, id) => {
+        const newColumns = new Map(get().board.columns)
+
+        // delete todoId from newColumns
+        // do it in an optimistic way
+        newColumns.get(id)?.todos.splice(taskIndex, 1)
+
+        set({board: {columns: newColumns}})
+
+        if(todo.image) {
+            await storage.deleteFile(todo.image.bucketId, todo.image.fileId)
+        }
+
+        await databases.deleteDocument(
+            process.env.NEXT_PUBLIC_DATABASE_ID!,
+            process.env.NEXT_PUBLIC_TODOS_COLLECTION_ID!,
+            todo.$id,
+        )
+    },
 }))
