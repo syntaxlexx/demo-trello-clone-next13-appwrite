@@ -1,5 +1,5 @@
 import { databases } from "@/appwrite"
-import { Board, Column, Todo, TypedColumn } from "@/types";
+import { Board, Column, Image, Todo, TypedColumn } from "@/types";
 
 const getTodosGroupedByColumn = async () => {
     const data = await databases.listDocuments(
@@ -22,7 +22,7 @@ const getTodosGroupedByColumn = async () => {
             $createdAt: todo.$createdAt,
             title: todo.title,
             status: todo.status,
-            ...(todo.image && { image: todo.image })
+            ...(todo.image && { image: JSON.parse(todo.image) as Image })
         })
 
         return acc
