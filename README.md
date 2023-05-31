@@ -1,8 +1,15 @@
+# Trello Clone built with Next13.4, Appwrite (Cloud), zustand, and ChatGPT
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+>Because, why not?
+
+![SCreenshot 1](public/screenshot-1.png)
+![SCreenshot 2](public/screenshot-2.png)
 
 ## Getting Started
 
-First, run the development server:
+First, create a `.env.local` file from the `.env.example`, paste Appwrite values, then run the development server:
 
 ```bash
 npm run dev
