@@ -6,6 +6,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ![SCreenshot 1](public/screenshot-1.png)
 ![SCreenshot 2](public/screenshot-2.png)
+![SCreenshot 2](public/openai-screenshot.png)
 
 ## Getting Started
 
