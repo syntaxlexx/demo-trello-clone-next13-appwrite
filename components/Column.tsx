@@ -33,7 +33,7 @@ function Column({ id, index, todos }: Props) {
                 {...provided.droppableProps}
                 ref={provided.innerRef}
                 className={`p-2 rounded-2xl shadow-sm ${
-                  snapshot.isDraggingOver ? "bg-gree-200" : "bg-white/50"
+                  snapshot.isDraggingOver ? "bg-green-200/50" : "bg-white/50"
                 }`}
               >
                 <h2 className="flex justify-between font-bold text-xl ">
