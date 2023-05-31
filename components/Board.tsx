@@ -7,11 +7,14 @@ import ColumnComponent from "./Column";
 import { Column } from "@/types";
 
 function Board() {
-  const [board, getBoard, setBoardState] = useBoardStore((state) => [
-    state.board,
-    state.getBoard,
-    state.setBoardState,
-  ]);
+  const [board, getBoard, setBoardState, updateTodoInDb] = useBoardStore(
+    (state) => [
+      state.board,
+      state.getBoard,
+      state.setBoardState,
+      state.updateTodoInDb,
+    ]
+  );
 
   useEffect(() => {
     getBoard();
@@ -53,8 +56,6 @@ function Board() {
     };
 
     if (!startCol || !finishCol) return;
-    console.log("startCol", startCol);
-    console.log("finishCol", finishCol);
 
     if (source.index === destination.index && startCol === finishCol) return;
 
@@ -89,7 +90,8 @@ function Board() {
         todos: finishTodos,
       });
 
-      // TODO update in db
+      // update in db
+      updateTodoInDb(todoMoved, finishCol.id);
 
       setBoardState({ ...board, columns: newColumns });
     }
