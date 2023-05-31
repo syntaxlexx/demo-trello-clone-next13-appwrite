@@ -1,5 +1,5 @@
 import { databases } from '@/appwrite';
-import { getTodosGroupedByColumn } from '@/lib/getTodosGroupedByColumn';
+import getTodosGroupedByColumn from '@/lib/getTodosGroupedByColumn';
 import { Board, Column, Todo, TypedColumn } from '@/types';
 import { create } from 'zustand'
 

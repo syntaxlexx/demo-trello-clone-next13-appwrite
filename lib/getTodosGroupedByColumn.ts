@@ -1,7 +1,7 @@
 import { databases } from "@/appwrite"
 import { Board, Column, Todo, TypedColumn } from "@/types";
 
-export const getTodosGroupedByColumn = async () => {
+const getTodosGroupedByColumn = async () => {
     const data = await databases.listDocuments(
         process.env.NEXT_PUBLIC_DATABASE_ID!,
         process.env.NEXT_PUBLIC_TODOS_COLLECTION_ID!,
@@ -51,3 +51,5 @@ export const getTodosGroupedByColumn = async () => {
 
     return board;
 }
+
+export default getTodosGroupedByColumn
